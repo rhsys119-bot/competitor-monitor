@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="TYM과 LS엠트론의 공식 소식을 함께 확인하는 경쟁사 모니터링 페이지">
+  <title>경쟁사 신규 컨텐츠</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">소식 목록으로 바로가기</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./" aria-label="경쟁사 모니터링 처음으로"><span class="brand-mark" aria-hidden="true"><span></span></span><span>경쟁사 모니터링</span></a>
+      <div class="header-right"><span class="connection" id="connection"><span class="status-dot"></span><span id="connection-text">수집 결과 확인 중</span></span><button class="button button-small" id="refresh-button" type="button">최신 결과 불러오기</button></div>
+    </div>
+  </header>
+  <main id="main" class="main-shell">
+    <section class="page-heading" aria-labelledby="page-title"><div><p class="eyebrow">OFFICIAL CHANNELS · TYM &amp; LS</p><h1 id="page-title">경쟁사 신규 컨텐츠</h1><p class="page-description">TYM과 LS엠트론의 공식채널, 새로운 소식부터 확인하세요.</p></div><div class="window-chip"><span aria-hidden="true">◷</span> 최근 2주부터 · 최신순</div></section>
+    <details class="system-status" id="system-status">
+      <summary><span class="status-overview"><span><span class="stat-label">최근 수집</span><strong id="last-run">확인 중</strong></span><span><span class="stat-label">저장된 소식</span><strong id="item-count">—</strong></span><span><span class="stat-label">공식채널</span><strong id="source-count">—</strong></span></span><span class="status-more">운영 현황 <span aria-hidden="true">⌄</span></span></summary>
+      <div class="status-details"><div class="status-detail-grid"><div><span>자동 확인</span><strong id="next-run">—</strong></div><div><span>최근 성공</span><strong id="last-success">—</strong></div><div><span>수집 결과 크기</span><strong id="storage-size">—</strong></div><div><span>결과 게시 시각</span><strong id="current-source">—</strong></div></div><p id="status-description">매시간 자동으로 확인한 공식채널 소식을 표시합니다. 예약 실행은 지연될 수 있습니다.</p></div>
+    </details>
+    <div class="global-error" id="status-error" role="alert" hidden><span id="status-error-text"></span><button class="text-button" type="button" id="retry-status">다시 불러오기</button></div>
+    <nav class="view-tabs" aria-label="컨텐츠 보기"><button type="button" data-view="all" aria-pressed="true">전체 소식</button><button type="button" data-view="unread" aria-pressed="false">미확인</button><button type="button" data-view="channels" aria-pressed="false">공식채널<span class="tab-count" id="channel-count" hidden></span></button></nav>
+    <div class="filter-bar"><div class="company-filter" role="group" aria-label="회사 필터"><button type="button" data-company="all" aria-pressed="true">전체</button><button type="button" data-company="TYM" aria-pressed="false">TYM</button><button type="button" data-company="LS" aria-pressed="false">LS</button></div><label class="topic-filter" id="topic-wrap"><span class="sr-only">주제 선택</span><select id="topic"><option value="all">모든 주제</option><option value="제품">제품</option><option value="캠페인">캠페인</option><option value="기업소식">기업소식</option><option value="기술">기술</option><option value="기타">기타</option></select></label><label class="search-box"><span aria-hidden="true" class="search-symbol"></span><span class="sr-only" id="search-label">과거 소식까지 검색</span><input id="search" type="search" placeholder="과거 소식까지 검색" aria-labelledby="search-label" maxlength="200" autocomplete="off"><span class="search-hint" id="search-hint">전체 기간</span></label></div>
+    <div class="new-items" id="new-items" hidden><span id="new-items-text">새 소식이 있습니다.</span><button type="button" id="show-new-items">목록 새로 보기 <span aria-hidden="true">↓</span></button></div>
+    <section id="feed-section" aria-label="경쟁사 소식">
+      <div class="scope-bar"><p id="scope" class="scope">소식을 불러오고 있습니다.</p><button type="button" id="mark-all" class="text-button" disabled>표시된 소식 모두 읽음</button></div>
+      <div id="feed-error" class="global-error" role="alert" hidden><span id="feed-error-text"></span><button type="button" id="retry-feed" class="text-button">다시 불러오기</button></div>
+      <div class="feed-layout"><div class="feed-column"><div id="item-list" class="item-list" aria-label="게시일 최신순 소식 목록" aria-busy="true"><div class="loading-card"><span class="loading-line"></span><span class="loading-line long"></span><span class="loading-line short"></span></div><div class="loading-card"><span class="loading-line"></span><span class="loading-line long"></span><span class="loading-line short"></span></div></div><div class="list-actions"><button type="button" id="load-more" class="button full-width" hidden>소식 더 보기</button><button type="button" id="older-toggle" class="older-button" aria-expanded="false" aria-controls="item-list" hidden>이전 소식 펼쳐보기</button></div><p class="read-note">읽음 처리는 선택입니다. 이 브라우저에만 기록되며, 다른 동료의 목록에는 영향을 주지 않습니다.</p></div><aside id="detail-panel" class="detail-panel" aria-label="선택한 소식 미리보기"><div class="detail-placeholder"><span class="preview-symbol" aria-hidden="true">↗</span><h2>소식을 선택해 주세요</h2><p>목록에서 선택하면 내용과<br>공식 원문 링크를 볼 수 있습니다.</p></div></aside></div>
+    </section>
+    <section id="directory-section" hidden aria-label="공식채널 목록"><div class="directory-intro"><p id="directory-scope" class="scope">공식채널을 불러오고 있습니다.</p><p>‘직접 확인’ 채널은 링크로 확인할 수 있으며, 자동으로 소식이 쌓이지 않습니다.</p></div><div id="source-error" class="global-error" role="alert" hidden><span>채널 현황을 불러오지 못했습니다.</span><button type="button" id="retry-sources" class="text-button">다시 불러오기</button></div><div id="directory" class="directory" aria-busy="true"></div></section>
+    <footer class="page-footer"><span>공식 출처만 모아, 필요한 소식부터.</span><span>제목·날짜·링크와 짧은 설명 저장 · 영상·사진 원본 저장 안 함</span></footer>
+    <p class="sr-only" id="announcement" role="status" aria-live="polite"></p>
+    <div class="toast" id="toast" role="status" hidden></div>
+  </main>
+  <noscript><p class="noscript-message">소식을 확인하려면 브라우저의 JavaScript를 켜 주세요.</p></noscript>
+</body>
+</html>
